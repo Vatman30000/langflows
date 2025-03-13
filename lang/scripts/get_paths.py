@@ -10,8 +10,7 @@ def get_file_paths(folder_path):
                 file_paths.append(file_path)
                 
     return file_paths
-
-folder_path = r"/home/alexandr/Yandex.Disk/pyprojects/langflow/lang/source/office_vacation"  # Укажите путь к вашей папке
+folder_path = os.path.join(os.getcwd(), "lang", "source","office_vacation")
 file_paths = get_file_paths(folder_path)
 
 for path in file_paths:
