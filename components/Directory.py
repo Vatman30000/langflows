@@ -83,11 +83,9 @@ class DirectoryComponent(Component):
 
         resolved_path = self.resolve_path(path)
 
-        # If no types are specified, use all supported types
         if not types:
             types = TEXT_FILE_TYPES
 
-        # Check if all specified types are valid
         invalid_types = [t for t in types if t not in TEXT_FILE_TYPES]
         if invalid_types:
             msg = f"Invalid file types specified: {invalid_types}. Valid types are: {TEXT_FILE_TYPES}"
@@ -100,4 +98,3 @@ class DirectoryComponent(Component):
         )
 
         return file_paths
-

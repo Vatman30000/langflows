@@ -31,10 +31,9 @@ class CustomComponent(Component):
     outputs = [
         Output(display_name="Output", name="output", method="build_output"),
     ]
-    # поменять логику
+
     def build_output(self) -> Data:
         data = Data(value=self.input_value)
         self.status = data
         
         return self.input_value
-
