@@ -2,16 +2,13 @@ from typing import Any, List, Dict
 from langflow.custom import Component
 from langflow.field_typing.range_spec import RangeSpec
 from langflow.inputs.inputs import (
-    BoolInput,
     DataInput,
-    DictInput,
     IntInput,
     MessageTextInput,
 )
 from langflow.io import Output
 from langflow.schema import Data
 from langflow.schema.dotdict import dotdict
-import docbuilder
 
 
 class UpdateDataComponent(Component):
@@ -84,20 +81,8 @@ class UpdateDataComponent(Component):
             build_config["number_of_fields"]["value"] = field_value_int
         return build_config
 
-    def build_data(self) -> Data:
-        """Process files and return extracted data."""
-        file_paths = self.paths
-        field_names = self.get_field_names()
-        processed_data = []
-
-        for file_path in file_paths:
-            if isinstance(file_path, Data):
-                file_path = file_path.text  
-            file_data = self.process_file(file_path, field_names)
-            processed_data.append(file_data)
 
 
-        return Data(data={"items": processed_data})
         
     def get_field_names(self) -> List[str]:
         """Get the list of field names from the component's attributes."""
@@ -156,3 +141,17 @@ class UpdateDataComponent(Component):
                 text_lines.append("")
 
         return '\n'.join(text_lines)
+        
+        
+    def build_data(self) -> Data:
+        """Process files and return extracted data."""
+        file_paths = self.paths
+        field_names = self.get_field_names()
+        processed_data = []
+
+        for file_path in file_paths:
+            if isinstance(file_path, Data):
+                file_path = file_path.text  
+            file_data = self.process_file(file_path, field_names)
+            processed_data.append(file_data)
+        return Data(data={"items": processed_data})
